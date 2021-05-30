@@ -1,5 +1,5 @@
 FROM ruby:2.7 AS vang-development
-LABEL maintainer="alexrogna@yahoo.com"
+LABEL maintainer="mapadrianpetre@gmail.com"
 
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg -o /root/yarn-pubkey.gpg && apt-key add /root/yarn-pubkey.gpg
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list

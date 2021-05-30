@@ -1,5 +1,5 @@
 FROM ruby:2.7 AS rails-toolbox
-LABEL maintainer="alexrogna@yahoo.com"
+LABEL maintainer="mapadrianpetre@gmail.com"
 ARG USER_ID
 ARG GROUP_ID
 RUN addgroup --gid $GROUP_ID user
