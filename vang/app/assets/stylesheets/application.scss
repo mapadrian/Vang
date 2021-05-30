@@ -16,6 +16,7 @@
  $yellow: #FDD409;
  $yellow-invert: #fff;
  $danger: red;
+ $dark: black;
  $primary: $yellow;
  $primary-invert: $yellow-invert;
  $link: $primary;
@@ -77,4 +78,22 @@
 
  .title{
     text-transform: uppercase;
+ }
+ .logo{
+     height: auto;
+     width: 300px;
+     margin-top: 5px;
+    img{
+        width: 100%;
+    }
+ }
+ .navbar-item img{
+     max-height: 2.5rem;
+ }
+ .hero{
+    background-image: url("../images/hero.jpg");
+    background-color: $yellow;
+    .title{
+        color: #fff;
+    }
  }
