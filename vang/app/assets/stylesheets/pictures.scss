@@ -57,6 +57,10 @@
         padding-top: .5rem;
       }
     }
+    img {
+        height: 25vh;
+        object-fit: cover;
+    }
   }
   .user-data{
     padding: 1rem 0 0 0;

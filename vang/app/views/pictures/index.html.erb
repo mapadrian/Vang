@@ -1,10 +1,11 @@
+<%= render 'hero' %>
 <section class="section">
   <div class="pictures">
     <% @pictures.each do |picture| %>
       <div class="picture-grid-item">
         <div class="picture-wrapper">
           <%= link_to picture, class:"picture" do %>
-              <%= image_tag(picture.user_picture_url)%>
+            <%= picture.user_picture.blank? ? image_tag("") : image_tag(picture.user_picture_url) %>
               <div class="picture-data">
                 <h3 class="picture-title"><%= picture.title %></h3>
                 <div class="picture-description"><%= truncate(picture.description, length: 60) %></div>
