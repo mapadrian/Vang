@@ -21,19 +21,33 @@
               <div class="level-item views data">
                 <%= link_to picture do%>
                   <span class="icon"><i class="fa fa-eye"></i></span>
-                  <%= picture.comments.count %>
+                  <%= picture.impressionist_count %>
                 <% end %>
               </div>
               <div class="level-item comments data">
                 <%= link_to picture do%>
                   <span class="icon"><i class="fa fa-comment"></i></span>
-                    0
+                  <%= picture.comments.count %>
                 <% end %>
               </div>
               <div class="level-item likes">
-                <%= link_to '' do %>
-                  <span class="icon"><i class="fa fa-heart"></i></span>
-                  <span class="vote_count">0</span>
+                <% if user_signed_in? %>
+                    <% if current_user.liked? picture %>
+                        <%= link_to unlike_picture_path(picture), method: :put, class: "unlike_picture" do %>
+                          <span class="icon"><i class="fa fa-heart has-text-primary"></i></span>
+                          <span class="vote_count"><%= picture.get_likes.size %></span>
+                        <% end %>
+                    <% else%>
+                        <%= link_to like_picture_path(picture), method: :put, class: "like_picture" do %>
+                            <span class="icon"><i class="fa fa-heart"></i></span>
+                            <span class="vote_count"><%= picture.get_likes.size %></span>
+                        <% end %>
+                    <% end %>
+                <% else %>
+                    <%= link_to like_picture_path(picture), method: :put, class: "like_picture" do %>
+                        <span class="icon"><i class="fa fa-heart"></i></span>
+                        <span class="vote_count"><%= picture.get_likes.size %></span>
+                    <% end %>
                 <% end %>
               </div>
             </div>

@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :pictures do
     resource :comments
+    member do
+      put 'like', to: "pictures#like"
+      put 'unlike', to: "pictures#unlike"
+    end
   end  
   root 'pictures#index'
   devise_for :users, controllers:{registrations:'registrations'}

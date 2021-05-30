@@ -48,16 +48,31 @@
         <div class="nav panel show-picture-analytics">
           <div class="panel-block views data">
             <span class="icon"><i class="fa fa-eye"></i></span>
-            0 Views
+            <%= pluralize(@picture.impressionist_count, 'View') %>
           </div>
           <div class="panel-block comments data">
             <span class="icon"><i class="fa fa-comment"></i></span>
-            0
             <%= pluralize(@picture.comments.count, 'Comment')%>
           </div>
           <div class="panel-block likes data">
-            <span class="icon"><i class="fa fa-heart"></i></span>
-            0
+            <% if user_signed_in? %>
+              <% if current_user.liked? @picture %>
+                  <%= link_to unlike_picture_path(@picture), method: :put, class: "unlike_picture" do %>
+                      <span class="icon"><i class="fa fa-heart has-text-primary"></i></span>
+                      <span class="vote_count"><%= pluralize(@picture.get_likes.size, 'Like') %></span>
+                  <% end %>
+              <% else%>
+                  <%= link_to like_picture_path(@picture), method: :put, class: "like_picture" do %>
+                      <span class="icon"><i class="fa fa-heart"></i></span>
+                      <span class="vote_count"><%= pluralize(@picture.get_likes.size, 'Like') %></span>
+                  <% end %>
+              <% end %>
+            <% else %>
+                <%= link_to like_picture_path(@picture), method: :put, class: "like_picture" do %>
+                    <span class="icon"><i class="fa fa-heart"></i></span>
+                    <span class="vote_count"><%= pluralize(@picture.get_likes.size, 'Like') %></span>
+                <% end %>
+            <% end %>
           </div>
         </div>
       </div>
