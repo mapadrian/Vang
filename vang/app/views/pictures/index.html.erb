@@ -1,27 +1,51 @@
-<h1>Pictures</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<section class="section">
+  <div class="pictures">
     <% @pictures.each do |picture| %>
-      <tr>
-        <td><%= picture.title %></td>
-        <td><%= picture.description %></td>
-        <td><%= picture.user_id %></td>
-        <td><%= link_to 'Show', picture %></td>
-        <td><%= link_to 'Edit', edit_picture_path(picture) %></td>
-        <td><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div class="picture-grid-item">
+        <div class="picture-wrapper">
+          <%= link_to picture, class:"picture" do %>
+              <%= image_tag(picture.user_picture_url)%>
+              <div class="picture-data">
+                <h3 class="picture-title"><%= picture.title %></h3>
+                <div class="picture-description"><%= truncate(picture.description, length: 60) %></div>
+                <div class="picture-time">
+                  <%= time_ago_in_words(picture.created_at) %> ago
+                </div>
+              </div>
+          <% end %>
+          <nav class="level picture-analytics">
+            <div class="level-left">
 
-<br>
+            </div>
+            <div class="level-right">
+              <div class="level-item views data">
+                <%= link_to picture do%>
+                  <span class="icon"><i class="fa fa-eye"></i></span>
+                    0
+                <% end %>
+              </div>
+              <div class="level-item comments data">
+                <%= link_to picture do%>
+                  <span class="icon"><i class="fa fa-comment"></i></span>
+                    0
+                <% end %>
+              </div>
+              <div class="level-item likes">
+                <%= link_to '' do %>
+                  <span class="icon"><i class="fa fa-heart"></i></span>
+                  <span class="vote_count">0</span>
+                <% end %>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div class="user-data">
+          <div class="user-thumb">
+            <%= gravatar_image_tag(picture.user.email.gsub('spam', 'mdeering'),alt: picture.user.name, :gravatar => { :secure => true, :size => 20, :d => "mp" }); %>
+          </div>
+          <div class="user-name"><%= picture.user.name %></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

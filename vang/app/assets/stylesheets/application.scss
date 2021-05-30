@@ -13,11 +13,11 @@
  *= require_tree .
  *= require_self
  */
- $orange: #FDD409;
- $orange-invert: #fff;
-
- $primary: $orange;
- $primary-invert: $orange-invert;
+ $yellow: #FDD409;
+ $yellow-invert: #fff;
+ $danger: red;
+ $primary: $yellow;
+ $primary-invert: $yellow-invert;
  $link: $primary;
  $link-hover: darken($primary, 20%);
 
@@ -73,7 +73,4 @@
    display: block !important;
  }
 
-.notification.is-danger{
-    background-color: red;
-}
 .file-input { visibility: hidden; }

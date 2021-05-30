@@ -1,13 +1,53 @@
-<p>
-  <strong>Title:</strong>
-  <%= @picture.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @picture.description %>
-</p>
-
-
-<%= link_to 'Edit', edit_picture_path(@picture) %> |
-<%= link_to 'Back', pictures_path %>
+<section class="section">
+  <div class="container">
+    <h1 class="title is-3"><%= @picture.title %></h1>
+    <div class="columns">
+      <div class="column is-8">
+        <span class="by has-text-grey-light">by</span>
+        <div class="user-thumb">
+          <%= gravatar_image_tag(@picture.user.email.gsub('spam', 'mdeering'), alt: @picture.user.name, :gravatar => { :secure => true, :size => 20, :d => "mp" }); %>
+        </div>
+        <div class="user-name has-text-weight-bold"><%= @picture.user.name %></div>
+        <div class="picture-time">
+          <span class="has-text-grey-light">posted</span>
+          <span class="has-text-weight-semibold"><%= verbose_date(@picture.created_at)%></span>
+        </div>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-8">
+        <div class="picture-container">
+          <div class="picture-full">
+            <%= image_tag @picture.user_picture_url unless @picture.user_picture.blank? %>
+          </div>
+          <% if user_signed_in? && (current_user.id == @picture.user_id)%>
+            <div class="buttons has-addons">
+              <%= link_to 'Edit', edit_picture_path(@picture), class: "button" %>
+              <%= link_to 'Delete', picture_path, class: "button is-danger", method: :delete, data: {confirm: 'Are you sure you want to delete this picture?'} %>
+            </div>
+          <% end %>
+          <div class="content">
+            <%= @picture.description %>
+          </div>
+        </div>
+      </div>
+      <div class="column is-3 is-offset-1">
+        <div class="nav panel show-picture-analytics">
+          <div class="panel-block views data">
+            <span class="icon"><i class="fa fa-eye"></i></span>
+            0 Views
+          </div>
+          <div class="panel-block comments data">
+            <span class="icon"><i class="fa fa-comment"></i></span>
+            0
+            <%#= pluralize(@picture.comments.count, 'Comment')%>
+          </div>
+          <div class="panel-block likes data">
+            <span class="icon"><i class="fa fa-heart"></i></span>
+            0
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
